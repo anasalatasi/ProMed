@@ -1,0 +1,63 @@
+name: promed
+description: A new Flutter project.
+
+publish_to: 'none'
+
+version: 0.4.0+1
+
+environment:
+  sdk: ">=2.12.0 <3.0.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+  cupertino_icons: ^1.0.4
+  http: ^0.13.3
+  auto_size_text: 3.0.0-nullsafety.0
+  flutter_html: ^2.1.2
+  flutter_secure_storage: ^4.2.1
+  video_player: ^2.2.0
+  chewie: ^1.1.0
+  image_capture_field: ^0.2.4
+  flutter_windowmanager: ^0.2.0
+  flutter_launcher_icons: ^0.9.2
+  better_player: ^0.0.73
+  font_awesome_flutter: ^9.1.0
+  url_launcher: ^6.0.10
+  share_plus: ^2.1.4
+  image_picker: ^0.8.4+1
+  image_picker_gallery_camera: ^0.1.5
+  flutter_widget_from_html: ^0.6.2
+  webview_flutter: ^2.0.13
+  flutter_inappwebview: ^5.3.2
+  firebase_messaging: 10.0.6
+  overlay_support: 1.2.1
+  firebase_core: 1.6.0
+  provider: ^5.0.0
+  mask_text_input_formatter: 2.0.0
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+flutter_icons:
+  image_path: "assets/images/ProMed.png"
+  android: true
+  ios: true
+
+flutter:
+
+  uses-material-design: true
+
+  assets:
+    - assets/images/Logo.jpg
+    - assets/images/forgotpasswordicon.jpg
+    - assets/images/subjectIcon.jpg
+    - assets/images/videoIcon.png
+    - assets/images/default-profile-pic.png
+    - assets/images/email_verification.png
+    - assets/images/lock0.png
+    - assets/images/lock1.png
+    - assets/images/TeacherMalek.JPG
+    - assets/images/default-profile-pic.jpeg
+    - assets/images/TeacherShadi.jpg
