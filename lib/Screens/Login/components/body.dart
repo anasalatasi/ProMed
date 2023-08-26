@@ -1,14 +1,11 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
-import 'package:promed/Screens/EmailVer/email_ver_screen.dart';
 import 'package:promed/Screens/ForgotPassword/forgot_password_screen.dart';
 import 'package:promed/Screens/Login/components/background.dart';
 import 'package:promed/Screens/Signup/signup_screen.dart';
 import 'package:promed/Screens/Home/home_screen.dart';
 import 'package:promed/components/already_have_an_account_acheck.dart';
 import 'package:promed/components/rounded_button.dart';
-import 'package:promed/components/rounded_input_field.dart';
-import 'package:promed/components/rounded_password_field.dart';
 import 'package:promed/components/text_field_container.dart';
 import 'package:promed/constants.dart';
 import 'package:http/http.dart' as http;
@@ -28,6 +25,7 @@ Future<http.Response> sendData({
     },
   );
 }
+
 class Body extends StatefulWidget {
   const Body({Key? key}) : super(key: key);
 
@@ -36,14 +34,14 @@ class Body extends StatefulWidget {
 }
 
 class _BodyState extends State<Body> {
-  bool isLoading = false ;
+  bool isLoading = false;
   final userController = TextEditingController();
   final passwordController = TextEditingController();
   @override
   void initState() {
-
     super.initState();
   }
+
   @override
   Widget build(BuildContext context) {
     String login = '';
@@ -60,7 +58,6 @@ class _BodyState extends State<Body> {
               height: size.height * 0.35,
             ),
             SizedBox(height: size.height * 0.03),
-
             TextFieldContainer(
               child: TextField(
                   controller: userController,
@@ -82,7 +79,6 @@ class _BodyState extends State<Body> {
                   ),
                   inputFormatters: []),
             ),
-
             TextFieldContainer(
               child: TextField(
                   controller: passwordController,
@@ -105,7 +101,6 @@ class _BodyState extends State<Body> {
                   ),
                   inputFormatters: []),
             ),
-
             RoundedButton(
                 pressable: true,
                 text: "تسجيل الدخول",
@@ -113,18 +108,14 @@ class _BodyState extends State<Body> {
                   setState(() {
                     isLoading = true;
                   });
-                  final response =
-                      await sendData(login: login, password: password);
-                  var jsonResponse =
-                      jsonDecode(utf8.decode(response.bodyBytes));
-                  print ("login : ${response.statusCode}");
+                  final response = await sendData(login: login, password: password);
+                  var jsonResponse = jsonDecode(utf8.decode(response.bodyBytes));
+                  print("login : ${response.statusCode}");
                   if (response.statusCode == 200) {
-                    await storage.write(
-                        key: 'access', value: jsonResponse['access']);
-                    await storage.write(
-                        key: 'username', value: jsonResponse['username']);
+                    await storage.write(key: 'access', value: jsonResponse['access']);
+                    await storage.write(key: 'username', value: jsonResponse['username']);
                     setState(() {
-                      isLoading = false ;
+                      isLoading = false;
                     });
                     Navigator.of(context).pushAndRemoveUntil(
                         MaterialPageRoute(
@@ -166,7 +157,7 @@ class _BodyState extends State<Body> {
                         ],
                       ),
                     );
-                  }else if(password.length<1 || login.length<1) {
+                  } else if (password.length < 1 || login.length < 1) {
                     showDialog<String>(
                       context: context,
                       builder: (BuildContext context) => AlertDialog(
@@ -223,10 +214,14 @@ class _BodyState extends State<Body> {
                   setState(() {
                     userController.clear();
                     passwordController.clear();
-                    isLoading=false;
+                    isLoading = false;
                   });
                 }),
-            Visibility(visible: isLoading, child: CircularProgressIndicator(color: kPrimaryColor,)),
+            Visibility(
+                visible: isLoading,
+                child: CircularProgressIndicator(
+                  color: kPrimaryColor,
+                )),
             SizedBox(height: size.height * 0.04),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
@@ -264,8 +259,7 @@ class _BodyState extends State<Body> {
                     'نسيت كلمة السر',
                     textAlign: TextAlign.right,
                     textDirection: TextDirection.rtl,
-                    style: TextStyle(
-                        color: kPrimaryColor, fontWeight: FontWeight.bold),
+                    style: TextStyle(color: kPrimaryColor, fontWeight: FontWeight.bold),
                   ),
                 ),
               ],

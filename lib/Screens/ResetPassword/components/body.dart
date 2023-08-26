@@ -1,6 +1,5 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
 import 'package:promed/Screens/Login/login_screen.dart';
 import 'package:promed/components/rounded_button.dart';
 import 'package:promed/components/rounded_input_field.dart';
@@ -59,7 +58,8 @@ class Body extends StatelessWidget {
                 ),
               ),
               SizedBox(height: size.height * 0.03),
-              RoundedInputField(inputFormatters: [],
+              RoundedInputField(
+                inputFormatters: [],
                 hasInst: false,
                 hintText: "رمز التحقق",
                 onChanged: (value) {
@@ -84,13 +84,8 @@ class Body extends StatelessWidget {
                 pressable: true,
                 text: "تحقق",
                 press: () async {
-                  final response = await sendData(
-                      email: email,
-                      password: password,
-                      password2: password2,
-                      verifyCode: verifyCode);
-                  var jsonResponse =
-                      jsonDecode(utf8.decode(response.bodyBytes));
+                  final response = await sendData(email: email, password: password, password2: password2, verifyCode: verifyCode);
+                  var jsonResponse = jsonDecode(utf8.decode(response.bodyBytes));
                   if (response.statusCode == 200) {
                     Navigator.push(
                       context,

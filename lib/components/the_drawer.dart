@@ -1,6 +1,5 @@
 import 'dart:convert';
 import 'package:auto_size_text/auto_size_text.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:promed/Screens/Teachers/teachers_screen.dart';
 import 'package:promed/Screens/Transfer/transfer_screen.dart';
@@ -14,7 +13,7 @@ import 'package:share_plus/share_plus.dart';
 
 class TheAppDrawer extends StatefulWidget {
   final List<String> libraries;
-  const TheAppDrawer({Key? key,required this.libraries}) : super(key: key);
+  const TheAppDrawer({Key? key, required this.libraries}) : super(key: key);
 
   @override
   State<TheAppDrawer> createState() => _TheAppDrawer();
@@ -33,8 +32,7 @@ class _TheAppDrawer extends State<TheAppDrawer> {
           children: [
             DrawerHeader(
               decoration: BoxDecoration(
-                gradient: LinearGradient(
-                    colors: <Color>[Colors.white, kPrimaryColor]),
+                gradient: LinearGradient(colors: <Color>[Colors.white, kPrimaryColor]),
               ),
               child: Center(
                 child: Column(
@@ -52,8 +50,7 @@ class _TheAppDrawer extends State<TheAppDrawer> {
                     Expanded(
                       child: FutureBuilder<Widget>(
                         future: getUsername(),
-                        builder: (BuildContext context,
-                            AsyncSnapshot<Widget?> snapshot) {
+                        builder: (BuildContext context, AsyncSnapshot<Widget?> snapshot) {
                           if (snapshot.hasData) {
                             return snapshot.data!;
                           } else {
@@ -65,8 +62,7 @@ class _TheAppDrawer extends State<TheAppDrawer> {
                     Expanded(
                       child: FutureBuilder<Widget>(
                         future: getPoints(),
-                        builder: (BuildContext context,
-                            AsyncSnapshot<Widget?> snapshot) {
+                        builder: (BuildContext context, AsyncSnapshot<Widget?> snapshot) {
                           if (snapshot.hasData) {
                             return snapshot.data!;
                           } else {
@@ -91,25 +87,17 @@ class _TheAppDrawer extends State<TheAppDrawer> {
               child: ExpansionTile(
                 title: Padding(
                   padding: EdgeInsets.all(0),
-                  child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  child: Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
+                    Row(
                       children: [
-                        Row(
-                          children: [
-                            Padding(
-                                padding: const EdgeInsets.all(3.0),
-                                child: Icon(Icons.credit_card,
-                                    color: kPrimaryColor)),
-                            SizedBox(
-                              width: 8.0,
-                            ),
-                            Text("تعبئة رصيد",
-                                style: TextStyle(
-                                    fontSize: size.width * 0.040,
-                                    color: Colors.black)),
-                          ],
+                        Padding(padding: const EdgeInsets.all(3.0), child: Icon(Icons.credit_card, color: kPrimaryColor)),
+                        SizedBox(
+                          width: 8.0,
                         ),
-                      ]),
+                        Text("تعبئة رصيد", style: TextStyle(fontSize: size.width * 0.040, color: Colors.black)),
+                      ],
+                    ),
+                  ]),
                 ),
                 onExpansionChanged: (bool expanding) {
                   setState(() {
@@ -121,9 +109,9 @@ class _TheAppDrawer extends State<TheAppDrawer> {
                   });
                 },
                 trailing: Icon(
-                    myArrow,
-                    color: kPrimaryColor,
-                  ),
+                  myArrow,
+                  color: kPrimaryColor,
+                ),
                 children: [
                   ListTile(
                     title: Text('عن طريق الهرم'),
@@ -157,18 +145,19 @@ class _TheAppDrawer extends State<TheAppDrawer> {
                 //expandedAlignment: Alignment(1,1),
               ),
             ),
-            Padding(padding:EdgeInsets.fromLTRB(8, 0, 8, 0)
-        ,child:
-            MenuWidget(
-              Icons.info_outline,
-              'لمحة عن الأساتذة',
-              onTap: () {
-                Navigator.of(context).push(MaterialPageRoute(
-                  builder: (context) => TeachersScreen(),
-                ));
-              },
-              arrow: true,
-            ),),
+            Padding(
+              padding: EdgeInsets.fromLTRB(8, 0, 8, 0),
+              child: MenuWidget(
+                Icons.info_outline,
+                'لمحة عن الأساتذة',
+                onTap: () {
+                  Navigator.of(context).push(MaterialPageRoute(
+                    builder: (context) => TeachersScreen(),
+                  ));
+                },
+                arrow: true,
+              ),
+            ),
             /*
             MenuWidget(
               Icons.mail_outline,
@@ -178,19 +167,20 @@ class _TheAppDrawer extends State<TheAppDrawer> {
             */
             Padding(
               padding: EdgeInsets.fromLTRB(8, 0, 8, 0),
-            child :MenuWidget(
-              Icons.logout_rounded,
-              'تسجيل خروج',
-              onTap: () {
-                storage.deleteAll();
-                Navigator.of(context).pushAndRemoveUntil(
-                    MaterialPageRoute(
-                      builder: (context) => WelcomeScreen(),
-                    ),
-                    (Route<dynamic> route) => false);
-              },
-              arrow: true,
-            ),),
+              child: MenuWidget(
+                Icons.logout_rounded,
+                'تسجيل خروج',
+                onTap: () {
+                  storage.deleteAll();
+                  Navigator.of(context).pushAndRemoveUntil(
+                      MaterialPageRoute(
+                        builder: (context) => WelcomeScreen(),
+                      ),
+                      (Route<dynamic> route) => false);
+                },
+                arrow: true,
+              ),
+            ),
             SizedBox(height: size.height * 0.02),
             Container(
               height: 1,
@@ -225,8 +215,7 @@ class _TheAppDrawer extends State<TheAppDrawer> {
               FontAwesomeIcons.facebookSquare,
               'Facebook',
               onTap: () async {
-                await launch(
-                    'https://www.facebook.com/%D9%85%D9%86%D8%B5%D8%A9-ProMed-%D8%A7%D9%84%D8%AA%D8%B9%D9%84%D9%8A%D9%85%D9%8A%D8%A9-104913855273045/');
+                await launch('https://www.facebook.com/%D9%85%D9%86%D8%B5%D8%A9-ProMed-%D8%A7%D9%84%D8%AA%D8%B9%D9%84%D9%8A%D9%85%D9%8A%D8%A9-104913855273045/');
               },
               arrow: false,
             ),
@@ -304,20 +293,17 @@ class _TheAppDrawer extends State<TheAppDrawer> {
 
   Future<Widget> getPoints() async {
     String? token = await storage.read(key: 'access');
-    http.Response response = await http.get(
-        Uri.parse(serverIP + '/main/points/'),
-        headers: {'Authorization': 'Token ' + token!});
+    http.Response response = await http.get(Uri.parse(serverIP + '/main/points/'), headers: {'Authorization': 'Token ' + token!});
     var jsonResponse = jsonDecode(utf8.decode(response.bodyBytes));
     return AutoSizeText(
-      'الرصيد : ' + jsonResponse['points'].toString()+' ل.س',
+      'الرصيد : ' + jsonResponse['points'].toString() + ' ل.س',
       maxFontSize: 15,
     );
   }
 }
 
 class MenuWidget extends StatelessWidget {
-  const MenuWidget(this.icons, this.text,
-      {required this.onTap, required this.arrow});
+  const MenuWidget(this.icons, this.text, {required this.onTap, required this.arrow});
 
   final IconData icons;
   final String text;
@@ -346,9 +332,7 @@ class MenuWidget extends StatelessWidget {
                 SizedBox(
                   width: 8.0,
                 ),
-                Text(text,
-                    style: TextStyle(
-                        fontSize: size.width * 0.040, color: Colors.black)),
+                Text(text, style: TextStyle(fontSize: size.width * 0.040, color: Colors.black)),
               ],
             ),
             if (arrow)

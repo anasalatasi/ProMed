@@ -1,9 +1,6 @@
-import 'dart:convert';
 import 'package:auto_size_text/auto_size_text.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:promed/constants.dart';
-
 
 class TheAppBar extends StatefulWidget {
   const TheAppBar({
@@ -15,7 +12,6 @@ class TheAppBar extends StatefulWidget {
 }
 
 class _TheAppBarState extends State<TheAppBar> {
-
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
@@ -51,8 +47,7 @@ class _TheAppBarState extends State<TheAppBar> {
           ],
         ),
       ),
-      actions: <Widget>[
-      ],
+      actions: <Widget>[],
       iconTheme: IconThemeData(color: kPrimaryColor),
     );
   }

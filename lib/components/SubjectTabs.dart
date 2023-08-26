@@ -1,5 +1,4 @@
 import 'dart:convert';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:promed/components/lecture_button.dart';
 import 'package:promed/constants.dart';
@@ -7,8 +6,7 @@ import 'package:http/http.dart' as http;
 
 Future<http.Response> fetchLectures(int id) async {
   String? token = await storage.read(key: 'access');
-  http.Response response =
-      await http.post(Uri.parse(serverIP + '/main/lectures/'), headers: {
+  http.Response response = await http.post(Uri.parse(serverIP + '/main/lectures/'), headers: {
     'Authorization': 'Token ' + token!,
   }, body: {
     'course': id.toString(),
@@ -16,13 +14,13 @@ Future<http.Response> fetchLectures(int id) async {
   return response;
 }
 
-Future<Widget> decodeLectures(int id , List<String> libraries) async {
+Future<Widget> decodeLectures(int id, List<String> libraries) async {
   http.Response response = await fetchLectures(id);
   var jsonResponse = jsonDecode(utf8.decode(response.bodyBytes));
   List<LectureButton> courses = [];
   for (var map in jsonResponse) {
     courses.add(LectureButton(
-      libraries : libraries,
+      libraries: libraries,
       lectureName: map['name'],
       price: map['price'],
       id: map['id'],
@@ -44,15 +42,14 @@ Future<Widget> decodeLectures(int id , List<String> libraries) async {
 
 class SubjectTabs extends StatefulWidget {
   final int id;
-  final List<String> libraries ;
-  SubjectTabs({required this.id,required this.libraries, Key? key}) : super(key: key);
+  final List<String> libraries;
+  SubjectTabs({required this.id, required this.libraries, Key? key}) : super(key: key);
 
   @override
   _SubjectTabsState createState() => _SubjectTabsState();
 }
 
-class _SubjectTabsState extends State<SubjectTabs>
-    with TickerProviderStateMixin {
+class _SubjectTabsState extends State<SubjectTabs> with TickerProviderStateMixin {
   int get id => widget.id;
 
   static const List<Tab> myTabs = <Tab>[
@@ -97,7 +94,7 @@ class _SubjectTabsState extends State<SubjectTabs>
         controller: _tabController,
         children: [
           FutureBuilder<Widget>(
-            future: decodeLectures(id,widget.libraries),
+            future: decodeLectures(id, widget.libraries),
             builder: (BuildContext context, AsyncSnapshot<Widget?> snapshot) {
               if (!snapshot.hasData) {
                 return Center(

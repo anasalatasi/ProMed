@@ -7,8 +7,7 @@ import 'package:http/http.dart' as http;
 Future<http.Response> fetchVideos(int id) async {
   String? token = await storage.read(key: 'access');
   return http.post(Uri.parse(serverIP + '/main/lecture/'), headers: {
-    'Authorization':
-        'Token ' + token!
+    'Authorization': 'Token ' + token!
   }, body: {
     'lecture': id.toString(),
   });

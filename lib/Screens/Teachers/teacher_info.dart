@@ -1,15 +1,12 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
 
 class TeacherInfo extends StatelessWidget {
   final String image;
   final String info;
   final int id;
-  const TeacherInfo(
-      {Key? key, required this.image, required this.info, required this.id})
-      : super(key: key);
+  const TeacherInfo({Key? key, required this.image, required this.info, required this.id}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -46,7 +43,9 @@ class TeacherInfo extends StatelessWidget {
                   ),
                 ),
               ),
-              SizedBox(height: 20,)
+              SizedBox(
+                height: 20,
+              )
             ],
           ),
         ),

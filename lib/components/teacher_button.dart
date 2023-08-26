@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:promed/Screens/Teachers/teacher_info.dart';
 import 'package:promed/constants.dart';
 import 'dart:convert';
-import 'dart:typed_data';
 
 class TeacherButton extends StatelessWidget {
   final String name;

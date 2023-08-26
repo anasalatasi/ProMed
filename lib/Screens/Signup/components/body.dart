@@ -1,7 +1,6 @@
 import 'dart:convert';
 import 'dart:core';
 import 'package:flutter/material.dart';
-import 'package:promed/Screens/EmailVer/email_ver_screen.dart';
 import 'package:promed/Screens/Login/login_screen.dart';
 import 'package:promed/components/already_have_an_account_acheck.dart';
 import 'package:promed/components/rounded_button.dart';
@@ -61,7 +60,8 @@ class _BodyState extends State<Body> {
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                RoundedInputField(inputFormatters: [],
+                RoundedInputField(
+                  inputFormatters: [],
                   small: true,
                   hasInst: false,
                   hintText: "الكنية",
@@ -69,7 +69,8 @@ class _BodyState extends State<Body> {
                     lastName = value;
                   },
                 ),
-                RoundedInputField(inputFormatters: [],
+                RoundedInputField(
+                  inputFormatters: [],
                   small: true,
                   hasInst: false,
                   hintText: "الاسم",
@@ -79,24 +80,25 @@ class _BodyState extends State<Body> {
                 ),
               ],
             ),
-            RoundedInputField(inputFormatters: [],
+            RoundedInputField(
+              inputFormatters: [],
               hintText: "اسم المستخدم",
-              instructions:
-                  'يجب أن يتكون اسم المستخدم من حروف وأرقام والرموز التالية _ @ + . - وألا يحتوي على فراغات',
+              instructions: 'يجب أن يتكون اسم المستخدم من حروف وأرقام والرموز التالية _ @ + . - وألا يحتوي على فراغات',
               onChanged: (value) {
                 userName = value;
               },
             ),
-            RoundedInputField(inputFormatters: [],
+            RoundedInputField(
+              inputFormatters: [],
               hintText: "رقم الموبايل",
-              instructions:
-                  'أدخل رقم الموبايل مع الرمز الدولي.\n مثال: 9639XXXXXXXX+',
+              instructions: 'أدخل رقم الموبايل مع الرمز الدولي.\n مثال: 9639XXXXXXXX+',
               onChanged: (value) {
                 mobileNumber = value;
               },
               icon: Icons.phone,
             ),
-            RoundedInputField(inputFormatters: [],
+            RoundedInputField(
+              inputFormatters: [],
               hintText: "البريد الإلكتروني",
               instructions: 'مثال: user@example.com',
               onChanged: (value) {
@@ -106,8 +108,7 @@ class _BodyState extends State<Body> {
             ),
             RoundedPasswordField(
               hintText: "كلمة السر",
-              instructions:
-                  'يجب أن تحتوي كلمة السر على ثمانية محارف على الاقل وأن تستوفي شرطين من الشروط التالية على الأقل: ان تحتوي على محرف صفير, مرحف كبير, رقم محرف خاص',
+              instructions: 'يجب أن تحتوي كلمة السر على ثمانية محارف على الاقل وأن تستوفي شرطين من الشروط التالية على الأقل: ان تحتوي على محرف صفير, مرحف كبير, رقم محرف خاص',
               onChanged: (value) {
                 password = value;
               },
@@ -124,19 +125,10 @@ class _BodyState extends State<Body> {
                 text: "إنشاء حساب",
                 color: kPrimaryColor,
                 press: () async {
-                  final response = await sendData(
-                      firstName: firstName,
-                      lastName: lastName,
-                      userName: userName,
-                      mobileNumber: mobileNumber,
-                      email: email,
-                      password: password,
-                      password2: password2);
-                  var jsonResponse =
-                      jsonDecode(utf8.decode(response.bodyBytes));
+                  final response = await sendData(firstName: firstName, lastName: lastName, userName: userName, mobileNumber: mobileNumber, email: email, password: password, password2: password2);
+                  var jsonResponse = jsonDecode(utf8.decode(response.bodyBytes));
                   String errorMessage = '';
-                  jsonResponse.forEach(
-                      (k, v) => errorMessage = errorMessage + '$k: $v' + '\n');
+                  jsonResponse.forEach((k, v) => errorMessage = errorMessage + '$k: $v' + '\n');
                   if (response.statusCode == 201) {
                     Navigator.push(
                       context,

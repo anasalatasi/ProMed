@@ -1,9 +1,6 @@
 import 'dart:convert';
-import 'dart:ui';
 import 'package:auto_size_text/auto_size_text.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/painting.dart';
 import 'package:flutter/services.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:promed/Screens/Login/components/background.dart';
@@ -14,12 +11,8 @@ import 'package:http/http.dart' as http;
 import 'package:provider/provider.dart';
 
 class LTBody extends StatefulWidget {
-
   List<String> items = [];
-  LTBody({
-    Key? key,required this.items
-  }) : super(key: key);
-
+  LTBody({Key? key, required this.items}) : super(key: key);
 
   @override
   _LTBodyState createState() => _LTBodyState();
@@ -54,11 +47,12 @@ class _LTBodyState extends State<LTBody> {
     }
     return libraries;
   }
+
   String selected = " ";
 
   @override
   void initState() {
-    selected=widget.items[0];
+    selected = widget.items[0];
     super.initState();
   }
 
@@ -92,10 +86,7 @@ class _LTBodyState extends State<LTBody> {
                           textDirection: TextDirection.ltr,
                           child: Text(
                             "تعبئة رصيد عن طريق مكتبات معتمدة",
-                            style: TextStyle(
-                                color: kPrimaryColor,
-                                fontWeight: FontWeight.bold,
-                                fontSize: 24),
+                            style: TextStyle(color: kPrimaryColor, fontWeight: FontWeight.bold, fontSize: 24),
                             textAlign: TextAlign.center,
                           ),
                         ),
@@ -175,18 +166,19 @@ class _LTBodyState extends State<LTBody> {
                   }),
             */
 
-
-        Container(
-          padding:EdgeInsets.fromLTRB(8,0,8,0),
-          margin: EdgeInsets.symmetric(vertical: 5, horizontal: 4.5),
-          decoration: BoxDecoration(
-            color: kPrimaryColor,
-            borderRadius: BorderRadius.circular(29),
-          ),
-          child :
-            DropdownButton<String>(
-              icon: Icon(Icons.local_library_outlined,color: Colors.white,),
-              /*selectedItemBuilder: (BuildContext context){
+            Container(
+              padding: EdgeInsets.fromLTRB(8, 0, 8, 0),
+              margin: EdgeInsets.symmetric(vertical: 5, horizontal: 4.5),
+              decoration: BoxDecoration(
+                color: kPrimaryColor,
+                borderRadius: BorderRadius.circular(29),
+              ),
+              child: DropdownButton<String>(
+                icon: Icon(
+                  Icons.local_library_outlined,
+                  color: Colors.white,
+                ),
+                /*selectedItemBuilder: (BuildContext context){
                                   return items.map((value) {
                                     return Container(
                                         alignment: Alignment.centerRight,
@@ -200,36 +192,38 @@ class _LTBodyState extends State<LTBody> {
                                     );
                                   }).toList();
                                 },*/
-              dropdownColor: kPrimaryColor,
+                dropdownColor: kPrimaryColor,
                 focusColor: kPrimaryColor,
                 iconEnabledColor: kPrimaryColor,
                 iconDisabledColor: kPrimaryLightColor,
-              isExpanded: true,
-              underline: Container(),
-              value: selected,
-              items: widget.items.map((value) {
-                return DropdownMenuItem<String>(
-                  value: value,
-                  child: Container(
-                      alignment: Alignment.centerRight,
-                      child: Padding (
-                        padding: EdgeInsets.fromLTRB(2, 2, 15, 2),
-                        child :Directionality(textDirection: TextDirection.rtl, child: AutoSizeText(
-                          value ,
-                          style:
-                          TextStyle(color:  Colors.white),
-                        ),),)
-                  )
-,
-                );
-              }).toList(),
-              onChanged: (val) {
-                print("onChange : ");
-                setState(() {
-                  selected = val! ;
-                });
+                isExpanded: true,
+                underline: Container(),
+                value: selected,
+                items: widget.items.map((value) {
+                  return DropdownMenuItem<String>(
+                    value: value,
+                    child: Container(
+                        alignment: Alignment.centerRight,
+                        child: Padding(
+                          padding: EdgeInsets.fromLTRB(2, 2, 15, 2),
+                          child: Directionality(
+                            textDirection: TextDirection.rtl,
+                            child: AutoSizeText(
+                              value,
+                              style: TextStyle(color: Colors.white),
+                            ),
+                          ),
+                        )),
+                  );
+                }).toList(),
+                onChanged: (val) {
+                  print("onChange : ");
+                  setState(() {
+                    selected = val!;
+                  });
                 },
-            ),),
+              ),
+            ),
             SizedBox(height: size.height * 0.03),
             TextFieldContainer(
               child: TextField(
@@ -262,18 +256,14 @@ class _LTBodyState extends State<LTBody> {
                   setState(() {
                     loading = true;
                   });
-                  response = await sendTransfer(
-                      amount: amount,
-                      lib_name:selected
-                  );
+                  response = await sendTransfer(amount: amount, lib_name: selected);
                   setState(() {
                     loading = false;
                     amount = "";
                   });
                   controller.clear();
                   print(response.statusCode);
-                  var jsonResponse =
-                      jsonDecode(utf8.decode(response.bodyBytes));
+                  var jsonResponse = jsonDecode(utf8.decode(response.bodyBytes));
                   if (response.statusCode == 200) {
                     showDialog<String>(
                       context: context,
@@ -327,9 +317,7 @@ class _LTBodyState extends State<LTBody> {
 
   Future<Widget> getDescription() async {
     String? token = await storage.read(key: 'access');
-    http.Response response = await http.get(
-        Uri.parse(serverIP + '/main2/transferdescription/'),
-        headers: {'Authorization': 'Token ' + token!});
+    http.Response response = await http.get(Uri.parse(serverIP + '/main2/transferdescription/'), headers: {'Authorization': 'Token ' + token!});
     var jsonResponse = jsonDecode(utf8.decode(response.bodyBytes));
     return AutoSizeText(
       jsonResponse['description'],

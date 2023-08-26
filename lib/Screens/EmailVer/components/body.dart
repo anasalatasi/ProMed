@@ -1,13 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
 import 'package:promed/Screens/Login/login_screen.dart';
 import 'package:promed/components/rounded_button.dart';
 import 'package:promed/components/rounded_input_field.dart';
 import '../../../constants.dart';
 import 'package:http/http.dart' as http;
 
-Future<http.Response> sendCode(
-    {required String userName, required String verifyCode}) {
+Future<http.Response> sendCode({required String userName, required String verifyCode}) {
   return http.post(
     Uri.parse(serverIP + '/main/verify_email/'),
     body: {
@@ -62,8 +60,7 @@ class Body extends StatelessWidget {
                 text: "تحقق",
                 press: () async {
                   print(verifyCode);
-                  http.Response response = await sendCode(
-                      userName: userName, verifyCode: verifyCode);
+                  http.Response response = await sendCode(userName: userName, verifyCode: verifyCode);
                   print(response.statusCode);
                   print(response.body);
                   if (response.statusCode == 202) {
